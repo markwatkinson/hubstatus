@@ -27,7 +27,7 @@
       
       var __finish = function() {
         if (finished) return;
-        finished = false;
+        finished = true;
         var num_committers = 0;
         for (var key in committers) num_committers++;
         if (callback) {
