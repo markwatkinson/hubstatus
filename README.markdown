@@ -12,14 +12,16 @@ Requires jQuery.
 
 ```javascript
 $(document).ready(function() {
-var project = 'username/project/branch';
-hubStatus.status(project, function(widget, health, data) {
-  ('body').append( $('<div>' +
-    project + ' has had at least ' + data.numCommits + ' commits in the last 30 days, by at least ' +
-    data.numCommitters + ' committer.<br/>Its health is rated as ' + health*100 + '%<br/> </div>')
-  );
-  $('body').append(widget);
+  var project = 'username/project/branch';
+  hubStatus.status(project, function(widget, health, data) {
+    ('body').append( $('<div>' +
+      project + ' has had at least ' + data.numCommits + ' commits in the last 30 days, by at least ' +
+      data.numCommitters + ' committer.<br/>Its health is rated as ' + health*100 + '%<br/> </div>')
+    );
+    $('body').append(widget);
+  });
 });
+
 ```
 
 Look at index.html.
