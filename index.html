@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title></title>
+    <meta content="">
+    <style></style>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js'>
+    </script>
+    <script src='status.js'>
+    </script>
+    <script>
+    $(document).ready(function() {
+      
+      $('#submit').click(function() {
+        var project = $('#project').val();
+        /* The 'status' method is a high level method which has some presets
+         * hard coded. If you're not happy with the granularity, you can build
+         * your own using the get(), widget() and health() functions
+        */
+
+        $('#out').text('Retrieving...');
+      
+        hubStatus.status(project, function(widget, health, data) {
+          $('#out').html('');
+          $('#out').append( $('<div>' +
+            project + ' has had at least ' + data.numCommits +
+            ' commits in the last 30 days, by at least ' +
+            data.numCommitters + ' committer.<br/>Its health is rated as ' +
+            health*100 + '%<br/> </div>')
+          );
+          $('#out').append(widget);
+        });
+      });
+
+      $('#form').submit(function() {
+        $('#submit').trigger('click')
+        return false;
+      });
+      
+    });
+    </script>
+  </head>
+  <body>
+    <form id='form'>
+      <label>Project: </label> <input type='text' id='project' value='markwatkinson/hubstatus/master' style='width:100em'>
+      <input type='button' id='submit' value='Go'>
+    </form>
+    <div id='out'></div>
+  </body>
+</html>
