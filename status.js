@@ -20,10 +20,14 @@
           now = new Date(),
           committers = {},
           num_commits = 0,
-          timeout_handler = null; // timeout to handle 404 errors and whatnot,
+          timeout_handler = null, // timeout to handle 404 errors and whatnot,
       // which jquery doesn't seem to allow you to catch very easily
+          finished = false; // checks that finish is not executed twice, in the
+          // case of an overzealous timeout 
       
       var __finish = function() {
+        if (finished) return;
+        finished = false;
         var num_committers = 0;
         for (var key in committers) num_committers++;
         if (callback) {
